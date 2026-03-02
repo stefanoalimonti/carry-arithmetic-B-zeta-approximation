@@ -1,0 +1,61 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Carry Polynomials and the Euler Product: An Approximation Framework"
+authors:
+  - family-names: Alimonti
+    given-names: Stefano
+    orcid: "https://orcid.org/0009-0009-1183-1698"
+    email: "stefalimonti@gmail.com"
+type: article
+date-released: 2026-03-05
+repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-B-zeta-approximation"
+keywords:
+  - Riemann zeta function
+  - Euler product
+  - carry polynomials
+  - companion matrices
+  - trace anomaly
+license: MIT
+references:
+  - type: article
+    title: "Spectral Theory of Carries in Positional Multiplication"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-A-spectral-theory"
+  - type: article
+    title: "Eigenvalue Statistics of Carry Companion Matrices: A Markov-Driven GOE↔GUE Transition in Sparse Non-Hermitian Ensembles"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-C-matrix-statistics"
+  - type: article
+    title: "The Carry-Zero Entropy Bound: Structural Limits of Bitwise Factorization"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-D-factorization-limits"
+  - type: article
+    title: "The Trace Anomaly of Binary Multiplication"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-E-trace-anomaly"
+  - type: article
+    title: "Exact Covariance Structure of Binary Carry Chains"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-F-covariance-structure"
+  - type: article
+    title: "The Angular Uniqueness of Base 2 in Positional Multiplication"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-G-angular-uniqueness"
+  - type: article
+    title: "Carry Polynomials and the Partial Euler Product: A Control Experiment"
+    authors:
+      - family-names: Alimonti
+        given-names: Stefano
+    repository-code: "https://github.com/stefanoalimonti/carry-arithmetic-H-euler-control"

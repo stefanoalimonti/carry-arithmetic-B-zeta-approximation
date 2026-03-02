@@ -1,0 +1,219 @@
+# Carry Polynomials and the Euler Product: An Approximation Framework
+
+**Author:** Stefano Alimonti
+**Affiliation:** Independent Researcher
+**Date:** March 2026
+
+---
+
+## Abstract
+
+We show that positional integer multiplication in base $b$ generates companion matrices $M_l$ — one per prime $l$ — whose ensemble-averaged spectral determinant approximates individual Euler factors of the Riemann zeta function:
+
+$$\langle|\det(I - M_l/l^s)|\rangle_N = \frac{R(l,s)}{|1 - l^{-s}|}$$
+
+where $R(l,s) = 1 + O(l^{-\sigma})$ is a genuine correction factor ($R \neq 1$). Two structural results are proven rigorously: the **Carry Representation Theorem** (CRT: the quotient polynomial coefficients equal negated carries, $q_i = -c_{i+1}$) and the **Unit Leading Carry** theorem (ULC: $c_{\text{top}} = 1$ in base 2). The correction factor admits the universal expansion $\ln R = c_1/l^s + c_2/l^{2s} + O(l^{-3\sigma})$, where $c_1 = \langle c_{\text{top}-1}\rangle - 1$ is the **trace anomaly**. High-statistics Monte Carlo ($\geq 10^8$ samples at $d = 32$–$128$) establishes $c_1 = 0.17460 \pm 0.00003$, ruling out $\ln(2)/4$ at $> 30\sigma$. Exact enumeration up to $K = 21$ ($4^{21} \approx 4.4 \times 10^{12}$ configurations) confirms the convergence of $c_1(K)$ toward $\pi/18 = 0.17453\ldots$ (matching to 4.3 significant digits at $K = 21$); the residual is consistent with the polynomial-geometric convergence model $c_1(K) = \pi/18 + P(K)(1/2)^K$ [E]. The appearance of $\pi$ is explained by the Angular Uniqueness Theorem: base 2 is the unique base for which the D-parity boundary is a straight line ($\alpha + \beta = \pi/4$) in angular coordinates, pulling $\pi$ from the integration limit [E]. For $b > 2$, $c_1(b)$ does not involve $\pi$. The framework provides a concrete arithmetic mechanism linking positional multiplication to $\zeta(s)$ as an approximation, not an exact identity.
+
+**Keywords:** Riemann zeta function, Euler product, carry polynomials, companion matrices, trace anomaly
+
+**MSC 2020:** 11M06, 11A63, 15A18, 60J10
+
+---
+
+## 1. Introduction
+
+The Riemann zeta function $\zeta(s) = \prod_p(1-p^{-s})^{-1}$ encodes the distribution of primes through its Euler product. We show that this product arises, approximately, from carries in positional multiplication.
+
+When two integers $p, q$ are multiplied in base $b$, the carry polynomial $C(x) = g(x)h(x) - f(x)$ encodes the discrepancy between formal and integer multiplication. Since $C(b) = 0$, we factor $C(x) = (x-b)Q(x)$, and the companion matrix $M$ of $Q$ has spectral properties that approximate Euler factors of $\zeta(s)$.
+
+We emphasize: this is an **approximation** ($R \neq 1$), not an exact identity. The correction is a genuine feature of the carry ensemble, not removable by a change of averaging.
+
+### Notation
+
+$N = pq$ (semiprime), $g(x), h(x), f(x)$ (digit polynomials), $C(x) = g(x)h(x) - f(x)$, $Q(x) = C(x)/(x-b)$, $M$ (companion matrix of $Q$), $D = \deg(Q)$.  The symbol $R(l,s)$ denotes the carry correction factor defined in §4; this is distinct from the sector ratio $R(K)$ used in companion papers [E], [P1], [P2].
+
+---
+
+## 2. The Carry Representation Theorem
+
+**Theorem 1** (CRT). $Q(x) = C(x)/(x-b)$ has integer coefficients $q_i = -c_{i+1}$.
+
+*Proof.* Since $C(b) = g(b)h(b) - f(b) = pq - pq = 0$: $(x-b) \mid C(x)$. Comparing coefficients of $C(x) = (x-b)Q(x)$: $C_k = q_{k-1} - bq_k$. Induction with $q_0 = -c_1$ yields $q_k = -c_{k+1}$. $\square$
+
+Verified with zero exceptions across 185,000 semiprimes ($\Delta < 10^{-15}$).
+
+---
+
+## 3. The Unit Leading Carry Theorem
+
+**Theorem 2** (ULC). For binary multiplication ($b = 2$) of odd primes with $C(x) \neq 0$: the leading carry satisfies $c_{\text{top}} = 1$.
+
+*Proof.* Since $C \neq 0$ by hypothesis, $Q = C/(x - b) \neq 0$. Write $D = \deg(Q)$, so $\deg(C) = D + 1$. By the CRT, the leading coefficient of $Q$ satisfies $q_D = -c_{D+1}$; we identify $c_{\text{top}} = c_{D+1}$ and establish $c_{D+1} = 1$ by a two-sided bound.
+
+**Carries are non-negative integers.** The carry sequence is defined by $c_0 = 0$ and
+
+$$c_{k+1} = \left\lfloor \frac{\text{conv}_k + c_k}{2} \right\rfloor, \qquad \text{conv}_k = \sum_{i+j=k} g_i h_j \geq 0.$$
+
+By induction on $k$: $c_0 = 0 \in \mathbb{Z}_{\geq 0}$, and if $c_k \in \mathbb{Z}_{\geq 0}$ then $c_{k+1} = \lfloor(\text{conv}_k + c_k)/2\rfloor \in \mathbb{Z}_{\geq 0}$, since the floor of a non-negative rational is a non-negative integer. Hence $c_k \in \mathbb{Z}_{\geq 0}$ for all $k$.
+
+Carry termination ($c_{D+2} = 0$). Let $m = \deg(g)$, $n = \deg(h)$. For $k > m + n$: $\text{conv}_k = 0$ (every term $g_i h_j$ with $i + j = k$ has $i > m$ or $j > n$, giving $g_i h_j = 0$). Since $pq < b^{m+n+2}$, the product has at most $m + n + 2$ digits, so $f_k = 0$ for $k > m + n + 1$. At any position where $\text{conv}_k = f_k = 0$, the carry recurrence reduces to $c_{k+1} = \lfloor c_k/2 \rfloor$. Since $\lfloor a/2 \rfloor < a$ for every positive integer $a$ (and $b = 2$), the sequence $(c_k)_{k > m+n+1}$ is strictly decreasing while positive and bounded below by $0$; it therefore reaches $0$ in finitely many steps. Fix any index $T > m + n + 1$ with $c_T = 0$.
+
+Now consider positions $k$ with $D + 1 < k \leq T$. The polynomial identity $C_k = 0$ (valid since $k > \deg(C) = D + 1$) gives $\text{conv}_k - f_k = 0$, so the carry recurrence $\text{conv}_k + c_k = f_k + 2c_{k+1}$ simplifies to $c_k = 2c_{k+1}$. Starting from $c_T = 0$ and applying $c_k = 2c_{k+1}$ downward: $c_{T-1} = 2c_T = 0$, $c_{T-2} = 2c_{T-1} = 0$, and by induction $c_k = 0$ for every $k \geq D + 2$. In particular, $c_{D+2} = 0$: no carry propagates beyond the leading position.
+
+Upper bound ($c_{D+1} \leq 1$). At position $D + 1$: $c_{D+2} = \lfloor(\text{conv}_{D+1} + c_{D+1})/2\rfloor = 0$, so $\text{conv}_{D+1} + c_{D+1} \leq 1$ (otherwise the floor would be $\geq 1$). Since $\text{conv}_{D+1} \geq 0$: $c_{D+1} \leq 1$.
+
+Lower bound ($c_{D+1} \geq 1$). The hypothesis $C \neq 0$ implies $Q \neq 0$, so $D = \deg(Q)$ is well-defined and the leading coefficient satisfies $q_D \neq 0$ (by the definition of polynomial degree: $Q = q_D x^D + \cdots + q_0$ with $q_D \neq 0$). The CRT gives $q_D = -c_{D+1}$, hence $c_{D+1} \neq 0$. Since $c_{D+1} \in \mathbb{Z}_{\geq 0}$ (established above), $c_{D+1} \geq 1$.
+
+Combining: $c_{D+1} = 1$. $\square$
+
+(When $C = 0$ — i.e., carry-free multiplication — $Q$ is identically zero, the companion matrix is absent, and the theorem is vacuous.)
+
+Verified 20,000/20,000. For general base $b$: $c_{\text{top}} \in \{1, \ldots, b-1\}$.
+
+---
+
+## 4. The Per-Factor Approximation
+
+### 4.1 Statement
+
+**Corollary 3** (of CRT). For any semiprime $N = pq$ in base $b$ with $C(x) \neq 0$, and any $l$ with $|l^s| > r_{\max}(Q)$:
+
+$$|\det(I - M/l^s)| = \frac{|Q(l^s)|}{(l^s)^D} = \frac{1}{|1 - b/l^s|} \cdot \frac{|C(l^s)|}{(l^s)^{D+1}}$$
+
+This is an algebraic identity (not statistical), holding for every individual semiprime. The denominator $|1 - b/l^s|$ reduces to the Euler factor $|1 - l^{-s}|$ when $b = 1$; for $b \geq 2$ the ratio $|1 - b/l^s|/|1 - l^{-s}| = 1 + O(b/l^{\sigma})$ is absorbed into the correction factor $R$.
+
+*Proof.* $\det(I - M/l^s) = (l^s)^{-D}Q(l^s)$ by the companion matrix characteristic polynomial. The CRT gives $C(x) = (x-b)Q(x)$. Since $C(b) = 0$, specializing at $x = l^s$ yields $Q(l^s) = C(l^s)/(l^s - b)$, and $|l^s - b|/(l^s) = |1 - b/l^s|$, giving the stated identity. $\square$
+
+The ensemble average defines the correction factor:
+
+$$\langle|\det(I - M_N/l^s)|\rangle_N = \frac{R(l,s)}{|1 - l^{-s}|}$$
+
+**Observation 4** (empirical). $R - 1 = O(1/l^{\sigma})$, approximately universal across primes, with leading term $c_1/l^{\sigma}$:
+
+| $l$ | $R(l,2) - 1$ | $l^2(R-1)$ |
+|-----|---------------|-------------|
+| 3 | 0.0186 | 0.167 |
+| 5 | 0.0068 | 0.170 |
+| 11 | 0.0014 | 0.167 |
+| 53 | 0.000060 | 0.168 |
+
+At $s = 2$: $l^2(R-1) \approx 0.168$ (cv < 2%), approximately constant across primes. This reflects the finite-$D$ effective $c_1$; in the $D \to \infty$ limit, $l^s(R-1)$ is conjectured to converge to $c_1 = \pi/18 \approx 0.1745$ (4.3 digits from $K = 21$ enumeration [E]).
+
+### 4.2 The Correction Factor
+
+$$\ln R(l,s) = \frac{c_1}{l^s} + \frac{c_2}{l^{2s}} + \frac{c_3}{l^{3s}} + \cdots$$
+
+- $c_1 = \langle c_{\text{top}-1}\rangle - 1$: the **trace anomaly**, universal across $l$, dependent on $D$.
+- $c_1 = \pi/18 = 0.17453\ldots$ (conjecture; ${\sim}4.3$ digits from direct enumeration at $K = 21$, consistent with polynomial-geometric convergence model $c_1(K) = \pi/18 + P(K)(1/2)^K$ [E]). High-statistics Monte Carlo rules out the natural candidate $\ln(2)/4$ at $> 30\sigma$. The D-even component has a closed-form proof (Lemma 1 below); the D-odd component is transcendental in $\{\ln 2, \ln 3, 1\}$ (PSLQ). The effective rate $\rho(K) = |\Delta(K)/\Delta(K{-}1)|$ approaches $1/2$ for $K \leq 17$ ($\rho(17) = 0.505$), then drops below $1/2$ at $K = 18$–$21$ ($\rho(21) = 0.333$), indicating a super-geometric phase where $P(K)$ passes through its maximum magnitude [E; experiment B30]. The base rate $1/2$ is the Diaconis–Fulman eigenvalue $\lambda_2 = 1/b$, proved for all bases $b$ [experiment B29; G, G04].
+
+**Lemma 1 (D-even trace anomaly component).**
+
+$$P_e \cdot c_1^{(e)} = 1 + 3\ln(3/4),$$
+
+where
+
+$$P_e = P(\text{D-even}) = 2(1-\ln 2), \qquad c_1^{(e)} = E[c_{\mathrm{top}-1} - 1 \mid \text{D-even}].$$
+
+*Proof.* Let $X, Y \sim U[0,1)$ represent the fractional parts of the two factors. The product $W = (1+X)(1+Y)$ satisfies $W \in [1,4)$; the D-even condition is $W \geq 2$. For D-even products the cascade is degenerate [E, §8.1], so
+
+$$c_{\mathrm{top}-1} = \lfloor W \rfloor - 1$$
+
+. Since $\lfloor W \rfloor \in \{2, 3\}$ on $[2, 4)$, the only non-zero contribution to $c_{\mathrm{top}-1} - 1$ comes from $\lfloor W \rfloor = 3$, i.e., $W \geq 3$. Hence $P_e \cdot c_1^{(e)} = P(W \geq 3)$. The integration domain $\{(x,y) \in [0,1)^2 : (1+x)(1+y) \geq 3\}$ has boundary $y = (2-x)/(1+x)$, which enters $[0,1)$ at $x = 1/2$. Therefore
+
+$$P(W \geq 3) = \int_{1/2}^{1}\!\int_{(2-x)/(1+x)}^{1} dy\,dx = \int_{1/2}^{1}\!\left(1 - \frac{2-x}{1+x}\right)dx = \int_{1/2}^{1}\frac{2x-1}{1+x}\,dx$$
+
+$$= \left[2x - 3\ln(1+x)\right]_{1/2}^{1} = (2 - 3\ln 2) - (1 - 3\ln(3/2)) = 1 + 3\ln(3/4). \qquad\square$$
+
+*Remark.* The trace anomaly $c_1$ of the Euler product correction studied in this paper is the leading spectral constant of the carry correction factor; it is related to, but distinct from, the macroscopic cascade trace anomaly $\Delta R$ studied in [E], which concerns the full sector ratio of the cascade valuation.
+- $c_2 \approx 0.181$, also universal in $l$.
+- Base-specific: $c_1(b)$ varies with base; $c_1(3) \approx 0.5985$ (candidate $\ln 3 - 1/2$ [G]), $c_1(10) \approx 4.20$ [E].
+
+### 4.3 Structural Properties of $R$
+
+1. **Jensen gap is genuine**: the geometric mean $\exp(\langle\ln|\det|\rangle)$ still yields $R_{\text{geom}} \neq 1$. The Jensen gap accounts for 2–6% of the total correction, confirming that $R$ is not an averaging artifact.
+2. **Character-blind determinant**: the spectral determinant shows no sensitivity to Dirichlet character structure — no direct connection to $L$-functions emerges at this level.
+3. **Base specificity and the Angular Uniqueness Theorem [G]**: $c_1 = \pi/18$ is specific to base 2, where the D-parity boundary $(1+X)(1+Y) = b$ becomes a straight line $\alpha + \beta = \pi/4$ in angular coordinates ($X = \tan\alpha$, $Y = \tan\beta$). This is algebraically unique: $\tan(\alpha+\beta) = (b-1-P)/(1-P)$ is constant iff $b = 2$ [G]. For $b > 2$, $c_1(b)$ does not involve $\pi$.
+
+---
+
+## 5. The Exact Correction Series
+
+The CRT yields an exact algebraic identity:
+
+$$h(l) = \langle|\det(I-M/l)|\rangle \cdot (1-1/l) = 1 + \sum_{k=1}^{D-1}\frac{\alpha_k}{l^k}$$
+
+where $\alpha_k = \langle c_{\text{top}-k}\rangle - \langle c_{\text{top}-k+1}\rangle$.
+
+Verified to $\Delta < 10^{-15}$ across 155,000 semiprimes. The coefficients $\alpha_k \to 1/4$ (base 2) for $k \geq 5$ — consistent with $E[c_j] = (j-1)/4$ [F] — with boundary deviations at $k = 1, 2$ explained by the carry Markov chain's 2-step mixing time [A].
+
+---
+
+## 6. Convergence Domain at $\sigma = 1/2$
+
+### 6.1 The Spectral Radius Constraint
+
+The bound $r_{\max} \leq b = 2$ [A, Conjecture 10] (verified computationally for 15,000+ semiprimes) ensures convergence of $\det(I - M/l^s)$ for $l^{\sigma} > 2$, i.e., $l \geq 5$ at $\sigma = 1/2$. The weaker Eneström-Kakeya bound $r_{\max} \leq 3$ (proved) gives $l \geq 11$.
+
+### 6.2 The Small-Prime Problem
+
+For $l = 2, 3$: the bound $r_{\max} \leq 2$ does not guarantee convergence at $\sigma = 1/2$ (since $l^{1/2} < 2$). Additionally, ~3% of semiprimes have $r_{\max} > \sqrt{2}$, requiring the renormalization $R(l,s)$.
+
+The carry barrier at $\sigma = 1/2$ is a statement about **ensemble-averaged convergence**: the $\alpha_k$ correction decay rate $(b-1)/b$ (see [A, §5]) provides square-root cancellation in carry sums, but absolute per-factor convergence at small primes requires renormalization.
+
+---
+
+## 7. Discussion
+
+### 7.1 What This Framework Achieves
+
+1. **Two proved structural theorems.** The CRT (Theorem 1) and ULC (Theorem 2) are unconditional, elementary results about base-$b$ multiplication. They hold for every semiprime and require no statistical assumptions.
+2. **An exact algebraic decomposition.** Corollary 3 expresses $|\det(I - M/l^s)|$ as a ratio involving the carry-base factor $|1 - b/l^s|^{-1}$, for each individual semiprime. This is a polynomial identity, not a statistical observation. The connection to the Euler factor $|1 - l^{-s}|^{-1}$ introduces a correction $|1 - b/l^s|/|1 - l^{-s}|$ that is absorbed into $R$.
+3. **An exact correction series.** The identity $h(l) = 1 + \sum \alpha_k / l^k$ (§5) is proved algebraically from CRT and verified to $\Delta < 10^{-15}$. The coefficients $\alpha_k$ are carry-chain observables computable from first principles.
+4. **A falsifiable prediction.** The universal expansion $\ln R = c_1/l^s + \cdots$ (§4.2) predicts that $c_1$ is base-specific: $c_1(2) \approx 0.1745$, $c_1(3) \approx 0.5985$, $c_1(10) \approx 4.20$. These are independently verifiable. The Angular Uniqueness Theorem [G] explains why $\pi$ appears only in base 2.
+5. **An honest control experiment.** The isolated correction $\prod R(l,s)$ is smooth with no structure at Riemann zeros [H], demonstrating that the framework does not overclaim.
+
+### 7.2 Unconditional vs. Conjectural Content
+
+Remark (Independence from $c_1 = \pi/18$). The structural results of this paper --- CRT (Theorem 1), ULC (Theorem 2), the algebraic decomposition (Corollary 3), and the exact correction series (§5) --- are unconditional. They hold for every base, every semiprime, and any value of $c_1$. The conjectured value $c_1 = \pi/18$ quantifies the leading correction term but is not required for any theorem. If a future proof established $c_1 = \kappa$ for some other constant $\kappa \in (0,1)$, every structural result would hold with $\kappa$ replacing $\pi/18$. The framework's validity is logically independent of the specific numerical value of $c_1$.
+
+### 7.3 What It Does Not Achieve
+
+- **Exact identity.** $R \neq 1$ is genuine, not an artefact. The Jensen gap test confirms $R_{\text{geom}} \neq 1$ independently.
+- **Functional equation.** The carry framework provides no analogue of $\xi(s) = \xi(1-s)$. Since the functional equation is what forces Riemann zeros onto $\sigma = 1/2$, no amount of spectral structure in $R$ can substitute for it. The carry-zeta product is not $\zeta(s)$ and, without a functional equation, is not a generalized $L$-function.
+- **Analytic continuation.** The carry product exists only for $\sigma > 0$.
+- **Information about Riemann zeros.** Define $Z_{\text{carry}}(s) = \prod_l \langle|\det(I - M_l/l^s)|\rangle$. A control experiment [H] decomposes this as $Z_{\text{carry}} = Z_{\text{Euler}} \cdot \prod R$ and shows that the pure partial Euler product $\prod |1-l^{-s}|^{-2}$ already produces identical minima near Riemann zeros ($\Delta t = 0.02$–$0.15$), while the isolated carry correction $\prod R(l,s)$ is a smooth function with no structure at the zeros. The carry framework adds no information about Riemann zeros beyond the Euler product itself.
+- **Recovery of prime distribution.** The carry ensemble averages over semiprimes $N = pq$. No mechanism has been identified by which such an average could recover information about the distribution of individual primes, which is what $\zeta(s)$ encodes via the von Mangoldt explicit formula.
+
+### 7.4 Open Questions
+
+1. Is $c_1 = \pi/18$ exact? The natural candidate $\ln(2)/4$ is ruled out at $> 30\sigma$ by Monte Carlo [E]. Direct enumeration at $K = 21$ ($4^{21} \approx 4.4 \times 10^{12}$ configurations) confirms the convergence of $c_1(K)$ toward $\pi/18 = 0.17453\ldots$ (matching to 4.3 significant digits at $K = 21$). The residual is consistent with the polynomial-geometric model $c_1(K) = \pi/18 + P(K)(1/2)^K$ [E]; model-free evidence is limited to the 4.3-digit agreement. The D-odd conditional is transcendental in $\{\ln 2, \ln 3, 1\}$ (PSLQ-proved). The convergence $c_1(K) \to \pi/18$ is governed by the Diaconis–Fulman eigenvalue $\lambda_2 = 1/b$, proved for general base $b$ [experiment B29; G, G04]. At $K = 18$–$21$, the effective rate drops below $1/2$ (super-geometric phase). The appearance of $\pi$ is explained by the Angular Uniqueness Theorem [G, Theorem]. A formal proof of $c_1 = \pi/18$ remains the central open problem.
+
+2. What does $\prod_l R(l,s)$ converge to? This quantifies the gap between carries and $\zeta(s)$.
+
+3. Can a modified ensemble (weighting, different integer class) eliminate $R$?
+
+---
+
+## 8. Reproducibility
+
+28 experiment scripts and 1 shared utility module in `experiments/`. Key scripts: `B15_CRT_ULC_proof.py`, `B14_c2_analytical_decomposition.py`, `B26_highprec_c1_measurement.py`, `B27_jensen_gap_test.py`, `B28_multibase_c1.py`.
+
+Requirements: Python 3.8+, NumPy, SciPy.
+
+---
+
+## References
+
+1. P. Diaconis, J. Fulman, "Carries, Shuffling, and Symmetric Functions," *Adv. Appl. Math.* 43(2), 176–196, 2009.
+2. J. Holte, "Carries, Combinatorics, and an Amazing Matrix," *Amer. Math. Monthly* 104(2), 138–149, 1997.
+3. D. E. Knuth, *The Art of Computer Programming, Vol. 2*, 3rd ed., Addison-Wesley, 1997.
+4. E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, 2nd ed., Oxford, 1986.
+5. [A] Companion paper: "Spectral Theory of Carries in Positional Multiplication," this series.
+6. [E] Companion paper: "The Trace Anomaly of Binary Multiplication," this series.
+7. [F] Companion paper: "Exact Covariance Structure of Binary Carry Chains," this series (`carry-arithmetic-F-covariance-structure` repo).
+8. [G] Companion paper: "The Angular Uniqueness of Base 2 in Positional Multiplication," this series.
+9. [H] S. Alimonti, *Carry Polynomials and the Partial Euler Product: A Control Experiment*, carry-arithmetic-H-euler-control (2026).
+
+---
+
+*CC BY 4.0. Code: MIT License.*
