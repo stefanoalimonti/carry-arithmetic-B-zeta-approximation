@@ -208,11 +208,11 @@ Requirements: Python 3.8+, NumPy, SciPy.
 2. J. Holte, "Carries, Combinatorics, and an Amazing Matrix," *Amer. Math. Monthly* 104(2), 138–149, 1997.
 3. D. E. Knuth, *The Art of Computer Programming, Vol. 2*, 3rd ed., Addison-Wesley, 1997.
 4. E. C. Titchmarsh, *The Theory of the Riemann Zeta-Function*, 2nd ed., Oxford, 1986.
-5. [A] Companion paper: "Spectral Theory of Carries in Positional Multiplication," this series.
-6. [E] Companion paper: "The Trace Anomaly of Binary Multiplication," this series.
-7. [F] Companion paper: "Exact Covariance Structure of Binary Carry Chains," this series (`carry-arithmetic-F-covariance-structure` repo).
-8. [G] Companion paper: "The Angular Uniqueness of Base 2 in Positional Multiplication," this series.
-9. [H] S. Alimonti, *Carry Polynomials and the Partial Euler Product: A Control Experiment*, carry-arithmetic-H-euler-control (2026).
+5. [A] Companion paper: "Spectral Theory of Carries in Positional Multiplication," this series. doi:10.5281/zenodo.18895593
+6. [E] Companion paper: "The Trace Anomaly of Binary Multiplication," this series. doi:10.5281/zenodo.18895604
+7. [F] Companion paper: "Exact Covariance Structure of Binary Carry Chains," this series (`carry-arithmetic-F-covariance-structure` repo). doi:10.5281/zenodo.18895607
+8. [G] Companion paper: "The Angular Uniqueness of Base 2 in Positional Multiplication," this series. doi:10.5281/zenodo.18895601
+9. [H] S. Alimonti, *Carry Polynomials and the Partial Euler Product: A Control Experiment*, carry-arithmetic-H-euler-control (2026). doi:10.5281/zenodo.18895603
 
 ---
 
