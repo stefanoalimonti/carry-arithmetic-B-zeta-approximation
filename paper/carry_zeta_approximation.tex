@@ -231,7 +231,7 @@ Combining: \(c_{D+1} = 1\). \(\square\)
 zero, the companion matrix is absent, and the theorem is vacuous.)
 
 Verified 20,000/20,000. For general base \(b\):
-\(c_{\text{top}} \in \{1, \ldots, b-1\}\).
+\(c_{\text{top}} \in \lbrace{}1, \ldots, b-1\rbrace{}\).
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
 
@@ -298,13 +298,13 @@ constant across primes. This reflects the finite-\(D\) effective \(c_1\); in the
   model \(c_1(K) = \pi/18 + P(K)(1/2)^K\) {[}E{]}). High-statistics Monte Carlo
   rules out the natural candidate \(\ln(2)/4\) at \(> 30\sigma\). The D-even
   component has a closed-form proof (Lemma 1 below); the D-odd component is
-  transcendental in \(\{\ln 2, \ln 3, 1\}\) (PSLQ). The effective rate
-  \(\rho(K) = |\Delta(K)/\Delta(K{-}1)|\) approaches \(1/2\) for \(K \leq 17\)
-  (\(\rho(17) = 0.505\)), then drops below \(1/2\) at \(K = 18\)--\(21\)
-  (\(\rho(21) = 0.333\)), indicating a super-geometric phase where \(P(K)\)
-  passes through its maximum magnitude {[}E; experiment B30{]}. The base rate
-  \(1/2\) is the Diaconis--Fulman eigenvalue \(\lambda_2 = 1/b\), proved for all
-  bases \(b\) {[}experiment B29; G, G04{]}.
+  transcendental in \(\lbrace{}\ln 2, \ln 3, 1\rbrace{}\) (PSLQ). The effective
+  rate \(\rho(K) = |\Delta(K)/\Delta(K{-}1)|\) approaches \(1/2\) for
+  \(K \leq 17\) (\(\rho(17) = 0.505\)), then drops below \(1/2\) at
+  \(K = 18\)--\(21\) (\(\rho(21) = 0.333\)), indicating a super-geometric phase
+  where \(P(K)\) passes through its maximum magnitude {[}E; experiment B30{]}.
+  The base rate \(1/2\) is the Diaconis--Fulman eigenvalue \(\lambda_2 = 1/b\),
+  proved for all bases \(b\) {[}experiment B29; G, G04{]}.
 \end{itemize}
 
 \textbf{Lemma 1 (D-even trace anomaly component).}
@@ -322,10 +322,11 @@ condition is \(W \geq 2\). For D-even products the cascade is degenerate {[}E,
 
 \[c_{\mathrm{top}-1} = \lfloor W \rfloor - 1\]
 
-. Since \(\lfloor W \rfloor \in \{2, 3\}\) on \([2, 4)\), the only non-zero
-contribution to \(c_{\mathrm{top}-1} - 1\) comes from \(\lfloor W \rfloor = 3\),
-i.e., \(W \geq 3\). Hence \(P_e \cdot c_1^{(e)} = P(W \geq 3)\). The integration
-domain \(\{(x,y) \in [0,1)^2 : (1+x)(1+y) \geq 3\}\) has boundary
+. Since \(\lfloor W \rfloor \in \lbrace{}2, 3\rbrace{}\) on \([2, 4)\), the only
+non-zero contribution to \(c_{\mathrm{top}-1} - 1\) comes from
+\(\lfloor W \rfloor = 3\), i.e., \(W \geq 3\). Hence
+\(P_e \cdot c_1^{(e)} = P(W \geq 3)\). The integration domain
+\(\lbrace{}(x,y) \in [0,1)^2 : (1+x)(1+y) \geq 3\rbrace{}\) has boundary
 \(y = (2-x)/(1+x)\), which enters \([0,1)\) at \(x = 1/2\). Therefore
 
 \[P(W \geq 3) = \int_{1/2}^{1}\!\int_{(2-x)/(1+x)}^{1} dy\,dx = \int_{1/2}^{1}\!\left(1 - \frac{2-x}{1+x}\right)dx = \int_{1/2}^{1}\frac{2x-1}{1+x}\,dx\]
@@ -508,13 +509,13 @@ independent of the specific numerical value of \(c_1\).
   significant digits at \(K = 21\)). The residual is consistent with the
   polynomial-geometric model \(c_1(K) = \pi/18 + P(K)(1/2)^K\) {[}E{]};
   model-free evidence is limited to the 4.3-digit agreement. The D-odd
-  conditional is transcendental in \(\{\ln 2, \ln 3, 1\}\) (PSLQ-proved). The
-  convergence \(c_1(K) \to \pi/18\) is governed by the Diaconis--Fulman
-  eigenvalue \(\lambda_2 = 1/b\), proved for general base \(b\) {[}experiment
-  B29; G, G04{]}. At \(K = 18\)--\(21\), the effective rate drops below \(1/2\)
-  (super-geometric phase). The appearance of \(\pi\) is explained by the Angular
-  Uniqueness Theorem {[}G, Theorem{]}. A formal proof of \(c_1 = \pi/18\)
-  remains the central open problem.
+  conditional is transcendental in \(\lbrace{}\ln 2, \ln 3, 1\rbrace{}\)
+  (PSLQ-proved). The convergence \(c_1(K) \to \pi/18\) is governed by the
+  Diaconis--Fulman eigenvalue \(\lambda_2 = 1/b\), proved for general base \(b\)
+  {[}experiment B29; G, G04{]}. At \(K = 18\)--\(21\), the effective rate drops
+  below \(1/2\) (super-geometric phase). The appearance of \(\pi\) is explained
+  by the Angular Uniqueness Theorem {[}G, Theorem{]}. A formal proof of
+  \(c_1 = \pi/18\) remains the central open problem.
 \item
   What does \(\prod_l R(l,s)\) converge to? This quantifies the gap between
   carries and \(\zeta(s)\).
